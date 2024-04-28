@@ -1,25 +1,24 @@
 package tick.banque.controllers;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tick.banque.models.Client;
-import tick.banque.interfaces.ClientInterface;
+import tick.banque.interfaces.CreditInterface;
+import tick.banque.models.Credit;
+
 import java.util.List;
 
-
-
-
-@RequestMapping("/bank")
+@RequestMapping("/credit")
 @RestController
-public class MainController {
+public class CreditController {
     @Autowired
-    private ClientInterface test;
+    private CreditInterface credit;
     // Get all examples
     @GetMapping
 
-    public List<Client> getAllClients() {
-        return test.findAll();
+    public List<Credit> getAllCredits() {
+        return credit.findAll();
     }
-
 }
