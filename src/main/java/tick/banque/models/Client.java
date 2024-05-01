@@ -10,25 +10,25 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CodeCli")
+    @Column(name = "code_cli")
     private int codeCli;
 
-    @Column(name = "NomCli")
+    @Column(name = "nom_cli")
     private String nomCli;
 
-    @Column(name = "PreCli")
+    @Column(name = "pre_cli")
     private String preCli;
 
-    @Column(name = "DateNaissance")
+    @Column(name = "date_naissance")
     private LocalDate dateNaissance;
 
-    @Column(name = "NumTel")
+    @Column(name = "num_tel")
     private String numTel;
 
-    @Column(name = "EmailCli")
+    @Column(name = "email_cli")
     private String emailCli;
 
-    @Column(name = "AdrCli")
+    @Column(name = "adr_cli")
     private String adrCli;
 
     public Client() {

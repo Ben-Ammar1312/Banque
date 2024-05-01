@@ -5,6 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -12,34 +14,34 @@ import java.util.Date;
 public class Placement extends Operation{
 
     @Column(name = "interet")
-    private double interet;
+    private BigDecimal interet;
 
-    @Column(name = "nouveauMontant")
-    private double nouveauMontant;
+    @Column(name = "nouveau_montant")
+    private BigDecimal nouveauMontant;
 
     public Placement() {
         super();
     }
 
-    public Placement(int numOp, Date dateOp, int agentId, double fraisOp, double montant, double interet, double nouveauMontant) {
+    public Placement(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant, BigDecimal interet, BigDecimal nouveauMontant) {
         super(numOp, dateOp, agentId, fraisOp, montant);
         this.interet = interet;
         this.nouveauMontant = nouveauMontant;
     }
 
-    public double getInteret() {
+    public BigDecimal getInteret() {
         return interet;
     }
 
-    public void setInteret(double interet) {
+    public void setInteret(BigDecimal interet) {
         this.interet = interet;
     }
 
-    public double getNouveauMontant() {
+    public BigDecimal getNouveauMontant() {
         return nouveauMontant;
     }
 
-    public void setNouveauMontant(double nouveauMontant) {
+    public void setNouveauMontant(BigDecimal nouveauMontant) {
         this.nouveauMontant = nouveauMontant;
     }
 }

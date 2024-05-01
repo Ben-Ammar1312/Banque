@@ -3,6 +3,9 @@ package tick.banque.models;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -10,22 +13,22 @@ import java.util.Date;
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "numCre")
+    @Column(name = "num_cre")
     private int numCre;
 
-    @Column(name = "dateCre")
-    private Date dateCre;
+    @Column(name = "date_cre", columnDefinition = "DATETIME(6)")
+    private LocalDateTime dateCre;
 
-    @Column(name = "montCre")
-    private int montCre;
+    @Column(name = "mont_cre")
+    private BigDecimal montCre;
 
-    @Column(name = "codeCli")
+    @Column(name = "code_cli")
     private int codeCli;
 
-    @Column(name = "numCpt")
+    @Column(name = "num_cpt")
     private int numCpt;
 
-    @Column(name = "filesPath")
+    @Column(name = "files_path")
     private String filesPath;
 
     @Column(name = "status")
@@ -34,7 +37,7 @@ public class Credit {
     public Credit() {
     }
 
-    public Credit(int numCre, Date dateCre, int montCre, int codeCli, int numCpt, String filesPath, String status) {
+    public Credit(int numCre, LocalDateTime dateCre, BigDecimal montCre, int codeCli, int numCpt, String filesPath, String status) {
         this.numCre = numCre;
         this.dateCre = dateCre;
         this.montCre = montCre;
@@ -52,19 +55,19 @@ public class Credit {
         this.numCre = numCre;
     }
 
-    public Date getDateCre() {
+    public LocalDateTime getDateCre() {
         return dateCre;
     }
 
-    public void setDateCre(Date dateCre) {
+    public void setDateCre(LocalDateTime dateCre) {
         this.dateCre = dateCre;
     }
 
-    public int getMontCre() {
+    public BigDecimal getMontCre() {
         return montCre;
     }
 
-    public void setMontCre(int montCre) {
+    public void setMontCre(BigDecimal montCre) {
         this.montCre = montCre;
     }
 

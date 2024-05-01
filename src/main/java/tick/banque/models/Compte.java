@@ -3,28 +3,31 @@ package tick.banque.models;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 
 @Entity
 @Table(name = "Compte")
 public class Compte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "numCpt")
+    @Column(name = "num_cpt")
     private int numCpt;
 
-    @Column(name = "montantGlobal")
-    private double montantGlobal;
+    @Column(name = "montant_global")
+    private BigDecimal montantGlobal;
 
-    @Column(name = "montantInit")
-    private double montantInit;
+    @Column(name = "montant_init")
+    private BigDecimal montantInit;
 
-    @Column(name = "codeCli")
+    @Column(name = "code_cli")
     private int codeCli;
 
     public Compte() {
     }
 
-    public Compte(int numCpt, double montantGlobal, double montantInit, int codeCli) {
+    public Compte(int numCpt, BigDecimal montantGlobal, BigDecimal montantInit, int codeCli) {
         this.numCpt = numCpt;
         this.montantGlobal = montantGlobal;
         this.montantInit = montantInit;
@@ -39,19 +42,19 @@ public class Compte {
         this.numCpt = numCpt;
     }
 
-    public double getMontantInit() {
+    public BigDecimal getMontantInit() {
         return montantInit;
     }
 
-    public void setMontantInit(double montantInit) {
+    public void setMontantInit(BigDecimal montantInit) {
         this.montantInit = montantInit;
     }
 
-    public double getMontantGlobal() {
+    public BigDecimal getMontantGlobal() {
         return montantGlobal;
     }
 
-    public void setMontantGlobal(double montantGlobal) {
+    public void setMontantGlobal(BigDecimal montantGlobal) {
         this.montantGlobal = montantGlobal;
     }
 

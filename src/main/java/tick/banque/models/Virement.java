@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,7 +21,7 @@ public class Virement extends Operation{
         super();
     }
 
-    public Virement(int numOp, Date dateOp, int agentId, double fraisOp, double montant, int destinataire, int source) {
+    public Virement(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant, int destinataire, int source) {
         super(numOp, dateOp, agentId, fraisOp, montant);
         this.destinataire = destinataire;
         this.source = source;

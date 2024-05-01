@@ -2,8 +2,9 @@ package tick.banque.models;
 
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -11,25 +12,25 @@ import java.util.Date;
 public abstract class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "numOp")
+    @Column(name = "num_op")
     private int numOp;
 
-    @Column(name = "dateOp")
-    private Date dateOp;
+    @Column(name = "date_op")
+    private LocalDateTime dateOp;
 
-    @Column(name = "agentId")
+    @Column(name = "agent_id")
     private int agentId;
 
-    @Column(name = "fraisOp")
-    private double fraisOp;
+    @Column(name = "frais_op")
+    private BigDecimal fraisOp;
 
     @Column(name = "montant")
-    private double montant;
+    private BigDecimal montant;
 
     public Operation() {
     }
 
-    public Operation(int numOp, Date dateOp, int agentId, double fraisOp, double montant) {
+    public Operation(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant) {
         this.numOp = numOp;
         this.dateOp = dateOp;
         this.agentId = agentId;
@@ -45,11 +46,11 @@ public abstract class Operation {
         this.numOp = numOp;
     }
 
-    public Date getDateOp() {
+    public LocalDateTime getDateOp() {
         return dateOp;
     }
 
-    public void setDateOp(Date dateOp) {
+    public void setDateOp(LocalDateTime dateOp) {
         this.dateOp = dateOp;
     }
 
@@ -61,19 +62,19 @@ public abstract class Operation {
         this.agentId = agentId;
     }
 
-    public double getFraisOp() {
+    public BigDecimal getFraisOp() {
         return fraisOp;
     }
 
-    public void setFraisOp(double fraisOp) {
+    public void setFraisOp(BigDecimal fraisOp) {
         this.fraisOp = fraisOp;
     }
 
-    public double getMontant() {
+    public BigDecimal getMontant() {
         return montant;
     }
 
-    public void setMontant(double montant) {
+    public void setMontant(BigDecimal montant) {
         this.montant = montant;
     }
 }

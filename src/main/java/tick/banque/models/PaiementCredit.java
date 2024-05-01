@@ -4,6 +4,8 @@ package tick.banque.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,7 +16,7 @@ public class PaiementCredit extends Operation {
         super();
     }
 
-    public PaiementCredit(int numOp, Date dateOp, int agentId, double fraisOp, double montant) {
+    public PaiementCredit(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant) {
         super(numOp, dateOp, agentId, fraisOp, montant);
     }
 }

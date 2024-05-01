@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Agent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "agentId")
+    @Column(name = "agent_id")
     private int agentId;
 
     @Column(name = "username")
@@ -18,7 +18,7 @@ public class Agent {
     @Column(name = "password_hash")
     private String passwrod;
 
-    @Column(name = "isAdmin")
+    @Column(name = "is_admin")
     private boolean isAdmin;
 
     public Agent() {
