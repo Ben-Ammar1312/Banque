@@ -17,4 +17,9 @@ public class Retrait extends Operation{
     public Retrait(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant) {
         super(numOp, dateOp, agentId, fraisOp, montant);
     }
+
+    @Override
+    public String getType() {
+        return "Retrait";
+    }
 }

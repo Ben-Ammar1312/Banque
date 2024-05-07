@@ -19,4 +19,8 @@ public class PaiementCredit extends Operation {
     public PaiementCredit(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant) {
         super(numOp, dateOp, agentId, fraisOp, montant);
     }
+    @Override
+    public String getType() {
+        return "Paiement credit";
+    }
 }

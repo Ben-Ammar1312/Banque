@@ -44,4 +44,9 @@ public class Placement extends Operation{
     public void setNouveauMontant(BigDecimal nouveauMontant) {
         this.nouveauMontant = nouveauMontant;
     }
+
+    @Override
+    public String getType() {
+        return "Placement";
+    }
 }

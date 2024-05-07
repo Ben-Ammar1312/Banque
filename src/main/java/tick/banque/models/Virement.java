@@ -42,4 +42,9 @@ public class Virement extends Operation{
     public void setSource(int source) {
         this.source = source;
     }
+
+    @Override
+    public String getType() {
+        return "Virement";
+    }
 }

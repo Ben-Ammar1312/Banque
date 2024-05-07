@@ -18,4 +18,9 @@ public class Versement  extends Operation{
     public Versement(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp,  BigDecimal montant) {
         super(numOp, dateOp, agentId, fraisOp, montant);
     }
+
+    @Override
+    public String getType() {
+        return "Versement";
+    }
 }
