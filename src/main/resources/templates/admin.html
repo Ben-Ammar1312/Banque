@@ -87,8 +87,8 @@
                     <tr th:each="agent : ${agents}">
                         <td th:text="${agent.agentId}"></td>
                         <td th:text="${agent.username}"></td>
-                        <td th:text="${agent.passwrod}">[Encrypted]</td>
-                        <td th:text="${agent.isAdmin} ? 'Yes' : 'No'"></td>
+                        <td th:text="${agent.password}">[Encrypted]</td>
+                        <td th:text="${agent.getRole()}"></td>
                     </tr>
                     </tbody>
                 </table>

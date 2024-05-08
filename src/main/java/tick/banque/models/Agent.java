@@ -16,19 +16,19 @@ public class Agent {
     private String username;
 
     @Column(name = "password_hash")
-    private String passwrod;
+    private String password;
 
-    @Column(name = "is_admin")
-    private boolean isAdmin;
+    @Column(name = "role")
+    private String role;
 
     public Agent() {
     }
 
-    public Agent(int agentId, String passwrod, String username, boolean isAdmin) {
+    public Agent(int agentId, String passwrod, String username, String role) {
         this.agentId = agentId;
-        this.passwrod = passwrod;
+        this.password = passwrod;
         this.username = username;
-        this.isAdmin = isAdmin;
+        this.role = role;
     }
 
     public int getAgentId() {
@@ -47,19 +47,19 @@ public class Agent {
         this.username = username;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public String getRole() {
+        return this.role;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setAdmin(String admin) {
+        this.role = admin;
     }
 
-    public String getPasswrod() {
-        return passwrod;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswrod(String passwrod) {
-        this.passwrod = passwrod;
+    public void setPassword(String passwrod) {
+        this.password = passwrod;
     }
 }
