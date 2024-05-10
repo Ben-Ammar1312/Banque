@@ -27,7 +27,19 @@ public abstract class Operation {
     @Column(name = "montant")
     private BigDecimal montant;
 
+    @ManyToOne
+    @JoinColumn(name = "num_cpt")
+    private Compte compte;
+
     public Operation() {
+    }
+
+    public Compte getCompte() {
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
     }
 
     public Operation(int numOp, LocalDateTime dateOp, int agentId, BigDecimal fraisOp, BigDecimal montant) {

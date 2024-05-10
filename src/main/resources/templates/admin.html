@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>CodePen - Dark UI - Bank dashboard concept</title>
+    <title>BankPro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
-
-
 </head>
 <body>
 
@@ -14,63 +12,51 @@
     <header class="app-header">
         <div class="app-header-logo">
             <div class="logo">
-				<span class="logo-icon">
-					<img src="https://assets.codepen.io/285131/almeria-logo.svg" />
-				</span>
+                <span class="logo-icon">
+                    <img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+                </span>
                 <h1 class="logo-title">
                     <span>BankPro</span>
                     <span>BankPro</span>
                 </h1>
             </div>
         </div>
-
-
         <div class="app-header-actions">
-            <button class="user-profile">
-                <span>Administration de la Banque</span>
-                <span>
-					<img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
-				</span>
-            </button>
-            <div class="app-header-actions-buttons">
-                <button class="icon-button large">
-                    <i class="ph-magnifying-glass"></i>
-                </button>
-                <button class="icon-button large">
-                    <i class="ph-bell"></i>
-                </button>
-            </div>
+            <span>Administration de la Banque</span>
+            <div class="app-header-actions-buttons"></div>
         </div>
         <div class="app-header-mobile">
             <button class="icon-button large">
                 <i class="ph-list"></i>
             </button>
         </div>
-
     </header>
+
     <div class="app-body">
-
-
-        <footer class="footer">
-            <h1>BankPro<small>©</small></h1>
-            <div>
-                <br />
-                All Rights Reserved 2024
-            </div>
-        </footer>
-
         <div class="app-body-main-content">
             <section class="service-section">
+                <a href="/logout">Logout</a>
                 <br>
-                <h2>Gestion des Comptes</h2>
+                <h2>Gestion des utilisateurs</h2>
                 <div class="filter-options">
-                    <p>                       </p>
-                    <button class="icon-button">
-                        <i class="ph-funnel"></i>
+                    <button class="icon-button" onclick="toggleAddAgentForm()">
+                        <i class="ph-plus"></i> Add Agent
                     </button>
-                    <button class="icon-button">
-                        <i class="ph-plus"></i>
-                    </button>
+                </div>
+                <div id="add-agent-form" style="display:none;">
+                    <form th:action="@{/admin/addAgent}" method="post"  th:object="${agent}">
+                        <label for="agentUsername">Agent Username:</label>
+                        <input type="text" id="agentUsername" th:field="*{username}" required><br>
+                        <label for="agentPassword">Agent Password:</label>
+                        <input type="password" id="agentPassword" th:field="*{password}" required><br>
+                        <label for="agentRole">Agent Role:</label>
+                        <select id="agentRole" th:field="*{role}" required>
+                            <option value="ROLE_ADMIN">Admin</option>
+                            <option value="ROLE_AGENT">Agent</option>
+                            <option value="ROLE_CLIENT">Client</option>
+                        </select><br>
+                        <button type="submit">Add Agent</button>
+                    </form>
                 </div>
                 <br>
                 <table>
@@ -78,9 +64,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Nom</th>
-                        <th>Solde</th>
-                        <th>Admin</th>
-                        <th>Actions</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,23 +75,22 @@
                         <td th:text="${agent.username}"></td>
                         <td th:text="${agent.password}">[Encrypted]</td>
                         <td th:text="${agent.getRole()}"></td>
+                        <td class="action-cell">
+                            <form th:action="@{'/admin/deleteAgent/' + ${agent.agentId}}" method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <button type="submit" class="icon-button delete-button">
+                                    <i class="ph-trash"></i>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
-
             </section>
+
             <section class="transfer-section">
                 <div class="transfer-section-header">
-                    <h2>Gestion des Transactions</h2>
-                    <div class="filter-options">
-                        <p>                     </p>
-                        <button class="icon-button">
-                            <i class="ph-funnel"></i>
-                        </button>
-                        <button class="icon-button">
-                            <i class="ph-plus"></i>
-                        </button>
-                    </div>
+                    <h2>Historique des Transactions</h2>
                 </div>
                 <br>
                 <table>
@@ -122,34 +107,33 @@
                     <tr th:each="operation : ${operations}">
                         <td th:text="${operation.numOp}"></td>
                         <td th:text="${operation.getType()}"></td>
-                        <td th:text="${operation.dateOp}"></td>
-                        <td th:text="${operation.montant}"></td>
+                        <td th:text="${operation.dateOp}"></td
+                        ><td th:text="${operation.montant}"></td>
                         <td th:text="${operation.fraisOp}"></td>
                     </tr>
                     </tbody>
                 </table>
-
-
-
             </section>
         </div>
-
-
-        <div class="payment-section-footer">
-            <button class="save-button">
-                Save
-            </button>
-            <button class="settings-button">
-                <i class="ph-gear"></i>
-                <span>More settings</span>
-            </button>
-        </div>
-        </section>
     </div>
-</div>
+
+    <footer class="footer">
+        <h1>BankPro<small>©</small></h1>
+        <div>All Rights Reserved 2024</div>
+    </footer>
 </div>
 
 <script src='https://unpkg.com/phosphor-icons'></script>
+<script>
+    function toggleAddAgentForm() {
+        var form = document.getElementById('add-agent-form');
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+</script>
 
 </body>
 </html>

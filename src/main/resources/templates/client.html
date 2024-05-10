@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>CodePen - Dark UI - Bank dashboard concept</title>
+    <title>Bank Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <link rel="stylesheet" th:href="@{/css/index.css}" />
 </head>
 <body>
-
 <div class="app">
     <header class="app-header">
         <div class="app-header-logo">
             <div class="logo">
 				<span class="logo-icon">
-					<img src="https://assets.codepen.io/285131/almeria-logo.svg" />
+					<img th:src="@{/img/logo.svg}" />
 				</span>
                 <h1 class="logo-title">
                     <span>BankPro</span>
@@ -22,10 +21,10 @@
             </div>
         </div>
 
-
+        <!-- Assuming 'client' is the model attribute for client data -->
         <div class="app-header-actions">
             <button class="user-profile">
-                <span>foulen elfouleni</span>
+                <span th:text="${client.nomCli}">foulen elfouleni</span>
                 <span>
 					<img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
 				</span>
@@ -44,11 +43,45 @@
                 <i class="ph-list"></i>
             </button>
         </div>
-
     </header>
     <div class="app-body">
+        <!-- Client Specific Information -->
+        <div class="app-body-main-content">
+            <section class="service-section">
+                <!-- Logout Link -->
+                <a href="/logout">Logout</a>
+
+                <h2>Account Details</h2>
+                <div>
+                    <p><strong>Account Number:</strong> <span th:text="${compte.numCpt}"></span></p>
+                    <p><strong>Initial Balance:</strong> <span th:text="${#numbers.formatCurrency(compte.montantInit)}"></span></p>
+                    <p><strong>Current Balance:</strong> <span th:text="${#numbers.formatCurrency(compte.montantGlobal)}"></span></p>
+                </div>
+            </section>
+            <section class="transaction-history">
+                <h2>Transaction History</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
 
+                    <tr th:each="transaction : ${operations}">
+                        <td th:text="${transaction.dateOp}"></td>
+                        <td th:text="${transaction.getType()}"></td>
+                        <td th:text="${transaction.montant}"></td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </section>
+        </div>
         <footer class="footer">
             <h1>BankPro<small>©</small></h1>
             <div>
@@ -56,135 +89,8 @@
                 All Rights Reserved 2024
             </div>
         </footer>
-
-        <div class="app-body-main-content">
-            <section class="service-section">
-                <h2>Service</h2>
-                <div class="service-section-header">
-                    <div class="search-field">
-                        <h2 >Bank balance</h2>
-
-                    </div>
-
-
-                </div>
-                <div class="mobile-only">
-                    <button class="flat-button">
-                        Toggle search
-                    </button>
-                </div>
-                <div class="tiles">
-                    <article class="tile">
-                        <div class="tile-header">
-                            <i class="ph-lightning-light"></i>
-                            <h3>
-                                <span>Electricity</span>
-                                <span>UrkEnergo LTD.</span>
-                            </h3>
-                        </div>
-                        <a href="#">
-                            <span>Go to service</span>
-                            <span class="icon-button">
-								<i class="ph-caret-right-bold"></i>
-							</span>
-                        </a>
-                    </article>
-                    <article class="tile">
-                        <div class="tile-header">
-                            <i class="ph-fire-simple-light"></i>
-                            <h3>
-                                <span>Heating Gas</span>
-                                <span>Gazprom UA</span>
-                            </h3>
-                        </div>
-                        <a href="#">
-                            <span>Go to service</span>
-                            <span class="icon-button">
-								<i class="ph-caret-right-bold"></i>
-							</span>
-                        </a>
-                    </article>
-                    <article class="tile">
-                        <div class="tile-header">
-                            <i class="ph-file-light"></i>
-                            <h3>
-                                <span>Credit</span>
-                                <span>Kharkov 62 str.</span>
-                            </h3>
-                        </div>
-                        <a href="#">
-                            <span>Go to service</span>
-                            <span class="icon-button" >
-								<i class="ph-caret-right-bold"></i>
-							</span>
-                        </a>
-                    </article>
-
-                </div>
-                <div class="service-section-footer">
-                    <p>Services are paid according to the current state of the currency and tariff.</p>
-                </div>
-            </section>
-            <section class="transfer-section">
-
-                <div class="app-body-main-content">
-                    <section class="service-section">
-                        <br>
-                        <h2>Historique des opérations</h2>
-                        <div class="filter-options">
-                            <p>                       </p>
-                            <button class="icon-button">
-                                <i class="ph-funnel"></i>
-                            </button>
-                            <button class="icon-button">
-                                <i class="ph-plus"></i>
-                            </button>
-                        </div>
-                        <br>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Description</th>
-                                <th>Montant</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Dupont</td>
-                                <td>1000€</td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </section>
-
-
-
-                    <div class="faq">
-                        <p>Most frequently asked questions</p>
-                        <div>
-                            <label>Question</label>
-                            <input type="text" placeholder="Type here">
-                        </div>
-                    </div>
-                    <div class="payment-section-footer">
-                        <button class="save-button">
-                            Save
-                        </button>
-                        <button class="settings-button">
-                            <i class="ph-gear"></i>
-                            <span>More settings</span>
-                        </button>
-                    </div>
-            </section>
-        </div>
     </div>
 </div>
-
-<script src='https://unpkg.com/phosphor-icons'></script><script  src="./script.js"></script>
-
+<script src='https://unpkg.com/phosphor-icons'></script>
 </body>
 </html>

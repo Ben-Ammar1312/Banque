@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.List;
 
 
 @Entity
@@ -23,8 +24,14 @@ public class Compte {
 
     @Column(name = "code_cli")
     private int codeCli;
+    @OneToMany(mappedBy = "compte")
+    private List<Operation> operations;
 
     public Compte() {
+    }
+
+    public List<Operation> getOperations() {
+        return operations;
     }
 
     public Compte(int numCpt, BigDecimal montantGlobal, BigDecimal montantInit, int codeCli) {

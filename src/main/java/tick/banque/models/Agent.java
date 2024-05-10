@@ -18,13 +18,19 @@ public class Agent {
     @Column(name = "password_hash")
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private Role role;
+
+    public enum Role {
+        ROLE_ADMIN, ROLE_AGENT, ROLE_CLIENT
+    }
+
 
     public Agent() {
     }
 
-    public Agent(int agentId, String passwrod, String username, String role) {
+    public Agent(int agentId, String passwrod, String username, Role role) {
         this.agentId = agentId;
         this.password = passwrod;
         this.username = username;
@@ -47,12 +53,12 @@ public class Agent {
         this.username = username;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return this.role;
     }
 
-    public void setAdmin(String admin) {
-        this.role = admin;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getPassword() {

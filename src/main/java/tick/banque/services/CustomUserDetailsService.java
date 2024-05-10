@@ -24,13 +24,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         List<SimpleGrantedAuthority> authorities;
         switch (agent.getRole()) {
-            case "ROLE_ADMIN":
+            case ROLE_ADMIN:
                 authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 break;
-            case "ROLE_CLIENT":
+            case ROLE_CLIENT:
                 authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_CLIENT"));
                 break;
-            case "ROLE_AGENT":
+            case ROLE_AGENT:
                 authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_AGENT"));
                 break;
             default:
