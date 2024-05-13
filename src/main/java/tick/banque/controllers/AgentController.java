@@ -25,7 +25,8 @@ import java.util.Optional;
 @Controller
 public class AgentController {
 
-
+    @Autowired
+    private CreditInterface creditInterface;
     @Autowired
     private AgentInterface agentInterface;
     @Autowired
@@ -236,6 +237,30 @@ public class AgentController {
         }
 
         return "compte";
+    }
+
+    @GetMapping("/credit")
+    public String creditPage(Model model) {
+        return "paiementCredit";
+    }
+
+    @PostMapping("/paiementCredit")
+    public String paiementCredit(@RequestParam("creditNumber") int creditNumber,
+                                 @RequestParam("paymentAmount") BigDecimal paymentAmount,
+                                 Model model) {
+        Credit credit = creditInterface.findById(creditNumber).orElse(null);
+        if (credit != null && paymentAmount.compareTo(BigDecimal.ZERO) > 0) {
+            if (credit.getMontCre().compareTo(paymentAmount) >= 0) {
+                credit.setMontCre(credit.getMontCre().subtract(paymentAmount));
+                creditInterface.save(credit);
+                model.addAttribute("message", "Payment successful. Remaining credit amount: " + credit.getMontCre());
+            } else {
+                model.addAttribute("message", "Payment amount exceeds the credit amount.");
+            }
+        } else {
+            model.addAttribute("message", "Invalid credit number or payment amount.");
+        }
+        return "paiementCredit";
     }
 
 }
