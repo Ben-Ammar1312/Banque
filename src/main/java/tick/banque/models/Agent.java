@@ -1,12 +1,17 @@
 package tick.banque.models;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 
 
 @Entity
 @Table(name = "Agent")
-public class Agent {
+public class Agent implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "agent_id")
@@ -37,6 +42,30 @@ public class Agent {
         this.role = role;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+    }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public int getAgentId() {
         return agentId;
     }
@@ -45,6 +74,12 @@ public class Agent {
         this.agentId = agentId;
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     public String getUsername() {
         return username;
     }
@@ -61,9 +96,6 @@ public class Agent {
         this.role = role;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String passwrod) {
         this.password = passwrod;

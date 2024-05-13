@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>CodePen - Dark UI - Bank dashboard concept</title>
+    <title>BankPro </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
     <style>
@@ -24,11 +24,15 @@
 <nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Transferts</a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operations</a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" th:href="@{/agent/depot-retrait}">Dépot / Retrait</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" th:href="@{/agent/virement}">Virement</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" th:href="@{/agent/placement}">Placement</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" th:href="@{/agent/credit}">Paiement Credit</a>
             </div>
         </li>
         <li class="nav-item dropdown">
@@ -36,6 +40,7 @@
             <div class="dropdown-menu">
                 <a class="dropdown-item" th:href="@{/agent/creerCompte}">Créer un compte</a>
                 <a class="dropdown-item" th:href="@{/agent/supprimer}">Supprimer un compte</a>
+                <a class="dropdown-item" th:href="@{/agent/demandeCredit}">Demande de credit</a>
             </div>
         </li>
     </ul>

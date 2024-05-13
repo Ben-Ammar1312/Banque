@@ -15,9 +15,9 @@ public class SecurityConfig {
         http
                 .authorizeRequests(requests -> requests
                         .requestMatchers("/login", "/login?logout", "/login?error").permitAll()
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/admin/**", "/uploads/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/client/**").hasAuthority("ROLE_CLIENT")
-                        .requestMatchers("/agent/**").hasAnyAuthority("ROLE_AGENT","ROLE_ADMIN")
+                        .requestMatchers("/agent/**").hasAnyAuthority("ROLE_AGENT", "ROLE_ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .successHandler(new CustomLoginSuccessHandler())
@@ -29,13 +29,12 @@ public class SecurityConfig {
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)
                         .permitAll());
-        return http.build();
 
+        return http.build();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

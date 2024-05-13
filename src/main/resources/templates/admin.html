@@ -44,7 +44,8 @@
                     </button>
                 </div>
                 <div id="add-agent-form" style="display:none;">
-                    <form th:action="@{/admin/addAgent}" method="post"  th:object="${agent}">
+                    <form th:action="@{/admin/addAgent}" method="post" th:object="${agent}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         <label for="agentUsername">Agent Username:</label>
                         <input type="text" id="agentUsername" th:field="*{username}" required><br>
                         <label for="agentPassword">Agent Password:</label>
@@ -107,13 +108,67 @@
                     <tr th:each="operation : ${operations}">
                         <td th:text="${operation.numOp}"></td>
                         <td th:text="${operation.getType()}"></td>
-                        <td th:text="${operation.dateOp}"></td
-                        ><td th:text="${operation.montant}"></td>
+                        <td th:text="${operation.dateOp}"></td>
+                        <td th:text="${operation.montant}"></td>
                         <td th:text="${operation.fraisOp}"></td>
                     </tr>
                     </tbody>
                 </table>
             </section>
+
+            <section class="credit-section">
+                <div class="credit-section-header">
+                    <h2>Gestion des Crédits</h2>
+                </div>
+                <br>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Montant</th>
+                        <th>Client Code</th>
+                        <th>Compte Numéro</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="credit : ${credits}">
+                        <td th:text="${credit.numCre}"></td>
+                        <td th:with="formattedDate=${#temporals.format(credit.dateCre, 'yyyy-MM-dd HH:mm:ss')}"
+                            th:text="${formattedDate}"></td>
+                        <td th:text="${credit.montCre}"></td>
+                        <td th:text="${credit.codeCli}"></td>
+                        <td th:text="${credit.numCpt}"></td>
+                        <td th:text="${credit.status}"></td>
+                        <td>
+                            <div th:if="${credit.status == 'En attente'}">
+                                <form th:action="@{'/admin/acceptCredit/' + ${credit.numCre}}" method="post" style="display:inline;">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                    <button type="submit" class="icon-button accept-button">
+                                        <i class="ph-check"></i>
+                                    </button>
+                                </form>
+                                <form th:action="@{'/admin/refuseCredit/' + ${credit.numCre}}" method="post" style="display:inline;">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                    <button type="submit" class="icon-button refuse-button">
+                                        <i class="ph-x"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- PDF Open Button -->
+                            <a th:href="@{'/uploads/' + ${credit.filesPath}}" target="_blank">
+                                <button class="icon-button open-button">
+                                    <i class="ph-file-pdf"></i> Open PDF
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
         </div>
     </div>
 
