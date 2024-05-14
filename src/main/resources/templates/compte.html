@@ -48,7 +48,9 @@
 
 
 <div class="app">
-
+    <div th:if="${#authorization.expression('hasAuthority(''ROLE_ADMIN'')')}">
+        <button class="btn btn-secondary" onclick="location.href='/admin'">Switch to Admin</button>
+    </div>
 </div>
 
 

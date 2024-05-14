@@ -24,7 +24,7 @@ public class SecurityConfig {
                         .permitAll()) // This enables and uses the default login page provided by Spring Security
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/login")
                         .deleteCookies("JSESSIONID")
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)

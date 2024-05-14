@@ -21,17 +21,34 @@
 <body>
 <nav>
     <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/agent/depot-retrait}">Dépot / Retrait</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Operations</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{/agent/depot-retrait}">Dépot / Retrait</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" th:href="@{/agent/virement}">Virement</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" th:href="@{/agent/placement}">Placement</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" th:href="@{/agent/credit}">Paiement Credit</a>
+            </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/agent/virement}">Virement</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{/agent/creerCompte}">Créer un compte</a>
+                <a class="dropdown-item" th:href="@{/agent/supprimer}">Supprimer un compte</a>
+                <a class="dropdown-item" th:href="@{/agent/demandeCredit}">Demande de credit</a>
+            </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/agent/placement}">Placement</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" th:href="@{/agent/credit}">Paiement Credit</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >Accueil</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{/agent}">Accueil</a>
+                <a class="dropdown-item" th:href="@{/logout}">deconnection</a>
+
+
+            </div>
         </li>
     </ul>
 </nav>
