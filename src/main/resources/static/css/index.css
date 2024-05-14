@@ -12,23 +12,12 @@
     --c-green-500: #45ffbc;
     --c-olive-500: #e3ffa8;
     --c-white: var(--c-gray-100);
-    --c-text-primary: var(--c-gray-100);
-    --c-text-secondary: var(--c-gray-200);
-    --c-text-tertiary: var(--c-gray-500);
+    --c-text-primary: var(--c-white);
+    --c-text-secondary: var(--c-white);
+    --c-text-tertiary: var(--c-white);
 }
 
-/*body {
-  line-height: 1.5;
-  min-height: 100vh;
-  font-family: "Be Vietnam Pro", sans-serif;
-  background-color: var(--c-gray-900);
-  color: var(--c-text-primary);
-  display: flex;
-  padding-top: 3vw;
-  padding-bottom: 3vw;
-  justify-content: center;
-}*/
-body{
+body {
     margin: 0;
     padding: 0;
     display: flex;
@@ -37,6 +26,7 @@ body{
     min-height: 100vh;
     font-family: 'Jost', sans-serif;
     background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    color: var(--c-text-primary);
 }
 
 *,
@@ -267,7 +257,7 @@ a {
     border: 0;
     background: transparent;
     cursor: pointer;
-    color: var(--c-text-tertiary);
+    color: var (--c-text-tertiary);
     transition: 0.25s ease;
 }
 .user-profile:hover, .user-profile:focus {
@@ -828,9 +818,10 @@ button:focus {
 table {
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid #bdbbb7; /* Specific color for table border */
 }
 
 th, td {
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #bdbbb7; /* Specific color for table cell borders */
 }
